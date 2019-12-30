@@ -5,7 +5,7 @@ const baseUrl = 'http://www.gotracker.ca/GoTracker/web/GODataAPIProxy.svc/Statio
 
 exports.fetchData = async () => {
     let date = new Date();
-    const url = baseUrl + '1570937761057';
+    const url = baseUrl + date.getMilliseconds();
     await fetch(url)
         .then(res => res.text())
         .then(str => {
@@ -19,7 +19,7 @@ exports.fetchData = async () => {
 function sortData() {
     let unionBound = [];
     data.forEach(item => {
-        if (item._attributes.Direction === 'Westbound towards Hamilton') {
+        if (item._attributes.DirectionIndex == 1) {
             unionBound.push(item);
         }
     });
